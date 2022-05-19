@@ -1,0 +1,30 @@
+name: Auto Pivotal Tracker style PR
+on:
+  push:
+     branches:
+      - 'feature/**'
+jobs:
+  AutoPR:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: Extract branch name
+        shell: bash
+        run: echo "::set-output name=branch::${GITHUB_REF#refs/heads/feature/}"
+        id: extract_branch
+      - name: Create Pull Request
+        uses: repo-sync/pull-request@v2
+        with:
+          destination_branch: "main"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          pr_title: "[#${{ steps.extract_branch.outputs.branch }}] "
+          pr_body: |
+            https://www.pivotaltracker.com/story/show/${{ steps.extract_branch.outputs.branch }}
+          # pr_label: "production"
+          pr_assignee: ${{ github.actor }}
