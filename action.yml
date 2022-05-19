@@ -1,4 +1,4 @@
-name: Auto Pivotal Tracker style PR
+name: Create a PR with an automatic title and summary by setting the branch as features/[Pivotal Tracker story ID], etc.
 on:
   push:
      branches:
