@@ -1,5 +1,9 @@
 name: Auto PR. Pivotal Tracker style
 description: Create a PR with an automatic title and summary by setting the branch as features/[Pivotal Tracker story ID].
+inputs:
+  github-token:
+    description: GitHub token
+    required: true
 runs:
   using: composite
   steps:
@@ -18,7 +22,7 @@ runs:
       uses: repo-sync/pull-request@v2
       with:
         destination_branch: "main"
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        github_token: ${{ inputs.github-token }}
         pr_title: "[#${{ steps.extract_branch.outputs.branch }}] "
         pr_body: |
           https://www.pivotaltracker.com/story/show/${{ steps.extract_branch.outputs.branch }}
