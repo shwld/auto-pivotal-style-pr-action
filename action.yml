@@ -6,8 +6,8 @@ inputs:
     required: true
 runs:
   using: composite
-  shell: bash
   steps:
+    shell: bash
     - uses: actions/checkout@v2
       with:
         fetch-depth: 0
