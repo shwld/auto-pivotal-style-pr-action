@@ -1,0 +1,16 @@
+name: Test
+
+on:
+  pull_request_review_comment:
+    types: [created, deleted]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+      steps:
+      - uses: actions/checkout@master
+        with:
+          fetch-depth: 0
+      - name: report analisys table change
+        run: |
+          echo GITHUB_EVENT_PATH is ${GITHUB_EVENT_PATH}.
