@@ -14,4 +14,4 @@ jobs:
       - name: report analisys table change
         run: |
           echo "GITHUB_EVENT_PATH is ${GITHUB_EVENT_PATH}."
-          jq ${GITHUB_EVENT_PATH}
+          cat ${GITHUB_EVENT_PATH} | jq .
