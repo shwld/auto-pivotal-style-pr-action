@@ -7,7 +7,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-      steps:
+    steps:
       - uses: actions/checkout@master
         with:
           fetch-depth: 0
